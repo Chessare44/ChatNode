@@ -55,9 +55,15 @@
 
         socket.on('enviarMensaje',function(message) {
           $("#chat")
-          .append(`<b>${message.name}</b> ${message.content} <br>`)
+          .append(`<b>${special(message.name)}</b> ${special(message.content)} <br>`)
         })
       })
+
+      function special(str){
+        str = str.replace(/</gi, '&lt;')
+        str = str.replace(/>/gi, '&gt;')
+        return str
+      }
 
     </script>
 
