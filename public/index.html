@@ -42,17 +42,21 @@
         var form = $("form").on("submit", function(e){
           e.preventDefault()
           var message = {
-            name: $("#username").val(),
-            content: $("#content").val()
+            name: $("#username").val().trim(),
+            content: $("#content").val().trim()
           }
-          socket.emit("nuevoMensaje", message)
+
+          if (message.name.length > 0 && message.content.length > 0){
+            socket.emit("nuevoMensaje", message)
+            $("#username").attr("disabled","disabled")
+            $("#content").val("").focus()
+          }
         })
 
         socket.on('enviarMensaje',function(message) {
           $("#chat")
           .append(`<b>${message.name}</b> ${message.content} <br>`)
         })
-
       })
 
     </script>
