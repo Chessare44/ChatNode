@@ -42,9 +42,14 @@
         })
         var form = $("form").on("submit", function(e){
           e.preventDefault()
+          let fecha = new Date();
+          let hora = fecha.getHours();
+          let minuto = fecha.getMinutes();
+          let hora_actual = hora+':'+minuto;
           var message = {
             name: $("#username").val().trim(),
-            content: $("#content").val().trim()
+            content: $("#content").val().trim(),
+            hora_mensaje:hora_actual,
           }
 
           if (message.name.length > 0 && message.content.length > 0){
@@ -55,8 +60,9 @@
         })
 
         socket.on('enviarMensaje',function(message) {
+
           $("#chat")
-          .append(`<b>${special(message.name)}</b> ${special(message.content)} <br>`)
+          .append(`${message.hora_mensaje} <b> ${special(message.name)}</b> ${special(message.content)} <br>`)
         })
       })
 

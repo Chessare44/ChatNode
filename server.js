@@ -8,6 +8,7 @@ io.on('connection', (socket) => {
   socket.on('nuevoMensaje', (message)=>{
     io.sockets.emit('enviarMensaje', message)
   })
+
 })
 
 app.use(express.static(__dirname + '/public'))
